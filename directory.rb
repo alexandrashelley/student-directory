@@ -89,33 +89,33 @@ def print_footer(students)
 end
 
 def save_students
-    # open the file for writing
-    file = File.open("students.csv", "w")
-    # iterate over the array of students
-    @students.each do |student|
-        student_data = [student[:name], student[:cohort]] # on every
-        # iteration, we create a new array with the name and cohort
-        csv_line = student_data.join(",")
-        file.puts csv_line
+  # open the file for writing
+  file = File.open("students.csv", "w")
+  # iterate over the array of students
+  @students.each do |student|
+    student_data = [student[:name], student[:cohort]] # on every
+    # iteration, we create a new array with the name and cohort
+      csv_line = student_data.join(",")
+      file.puts csv_line
     end
     file.close
 end
 
 def load_students(filename = "students.csv")
-    file = File.open(filename, "r")
-    file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-      @students << {name: name, cohort: cohort.to_sym}
-    end
-    file.close
+  file = File.open(filename, "r")
+  file.readlines.each do |line|
+  name, cohort = line.chomp.split(',')
+    @students << {name: name, cohort: cohort.to_sym}
+  end
+  file.close
 end
 
 def try_load_students
-    filename = ARGV.first
-    return if filename.nil?
+  filename = ARGV.first
+  return if filename.nil?
     if File.exists?(filename)
-      load_students(filename)
-        puts "Loaded #{@students.count} from #{filename}"
+    load_students(filename)
+      puts "Loaded #{@students.count} from #{filename}"
     else
       puts "Sorry, #{filename} doesn't exist."
       exit # quit the program
