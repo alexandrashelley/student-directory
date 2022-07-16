@@ -1,5 +1,6 @@
 # an empty array accessible to all methods
 @students = []
+
 def print_menu
     puts "1. Input the students"
     puts "2. Show the students"
@@ -10,10 +11,10 @@ def print_menu
 end
 
 def interactive_menu
-    loop do
-        print_menu
-        process(gets.chomp) # we're passing user selection as an 
-        # argument to this method
+  loop do
+    print_menu
+    process(gets.chomp) # we're passing user selection as an 
+     # argument to this method
     end
 end
 
@@ -80,7 +81,11 @@ def print_students_list(students)
 end
 
 def print_footer(students)
+  if students.count == 1
+    puts "Overall, we have #{students.count} great student"
+  else
     puts "Overall, we have #{students.count} great students"
+  end
 end
 
 def save_students
@@ -110,12 +115,11 @@ def try_load_students
     return if filename.nil?
     if File.exists?(filename)
       load_students(filename)
-        puts "Loaded #{@students.count from #{filename}"
-    else #if it doesn't exist
+        puts "Loaded #{@students.count} from #{filename}"
+    else
       puts "Sorry, #{filename} doesn't exist."
       exit # quit the program
     end
 end
 
-try_load_students
 interactive_menu
